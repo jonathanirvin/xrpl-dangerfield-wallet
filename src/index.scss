@@ -1,0 +1,21 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "./constants";
+
+.root {
+  background-color: $background;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 480px;
+  padding: 0;
+}
+
+h1 {
+  color: $primary;
+  font-size: 24px;
+  margin: 0 0 24px;
+
+  span {
+    margin-left: 16px;
+  }
+}
