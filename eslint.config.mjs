@@ -8,8 +8,8 @@ const config = [
     {
         settings: {
             react: {
-                version: "detect",
-                runtime: "automatic",
+                version: "detect", // Detect React version
+                runtime: "automatic", // Use React 17+ automatic runtime
             },
         },
         languageOptions: {
@@ -21,12 +21,13 @@ const config = [
                     Object.entries( globals.node ).map( ( [ key, value ] ) => [ key.trim(), value ] )
                 ),
             },
-            ecmaVersion: 2021,
-            sourceType: "module",
+            ecmaVersion: "latest", // Use latest ECMAScript version
+            sourceType: "module", // Use ES modules
         },
         rules: {
-            "react/prop-types": "off",
-            "react/react-in-jsx-scope": "off",
+            "react/prop-types": "off", // Disable if unnecessary
+            "react/react-in-jsx-scope": "off", // Disable outdated rule
+            "no-unused-vars": "warn"
         },
     },
 ];

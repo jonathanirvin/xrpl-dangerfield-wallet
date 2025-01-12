@@ -2,6 +2,6 @@
 
 This project was setup with the help of Chris Dangerfield's XRPL course
 
-## Obtained XRPL certification
+## Obtained XRPL Certification
 
 Once obtained, the link to the certification will be here

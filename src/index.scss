@@ -2,7 +2,6 @@
 @import "./constants";
 
 .root {
-  background-color: $background;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -18,4 +17,8 @@ h1 {
   span {
     margin-left: 16px;
   }
+}
+
+.main {
+  margin: 15px;
 }
