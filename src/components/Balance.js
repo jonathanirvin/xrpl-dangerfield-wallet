@@ -8,7 +8,6 @@ function Balance() {
     const { balance, reserve, refreshBalance } = useAccounts();
 
     const BalanceDisplay = () => {
-        console.log( 'balance', balance );
         const numericBalance = Number( balance );
         const numericReserve = Number( reserve );
 
