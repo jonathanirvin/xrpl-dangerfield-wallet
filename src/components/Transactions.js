@@ -23,8 +23,8 @@ function Transactions() {
                 />
             </label>
             <ul>
-                {transactions.map( ( transaction ) => (
-                    <li key={transaction.hash}>
+                {transactions.map( ( transaction, index ) => (
+                    <li key={index}>
                         <Transaction transaction={transaction} />
                     </li>
                 ) )}

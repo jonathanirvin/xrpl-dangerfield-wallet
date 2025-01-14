@@ -2,21 +2,35 @@ import { faCirclePlus, faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 import { Wallet } from "xrpl";
+import Spinner from "../components/Spinner";
 import { useAccounts } from "../contexts/AccountContext";
 import "./generate-account.scss";
 
 function GenerateAccount() {
     const [ seed, setSeed ] = useState( null );
     const [ address, setAddress ] = useState( "" );
-    const { addAccount } = useAccounts();
+    const [ showModal, setShowModal ] = useState( false );
+    const { addAccount, generateAndFundWalletWithFaucet } = useAccounts();
     const navigate = useNavigate();
 
-    const handleGenerateAccount = () => {
-        const newWallet = Wallet.generate();
+    const USE_FAUCET = true;
+
+    const handleGenerateAccount = async () => {
+
+        setShowModal( true );
+        let newWallet;
+        if ( USE_FAUCET ) {
+            newWallet = await generateAndFundWalletWithFaucet();
+        } else {
+            newWallet = Wallet.generate();
+        }
+
         setSeed( newWallet.seed );
         setAddress( newWallet.classicAddress );
+        setShowModal( false );
     };
 
     const handleSaveAccount = () => {
@@ -75,6 +89,16 @@ function GenerateAccount() {
                     </Button>
                 </>
             )}
+
+            <Modal show={showModal}>
+                <Modal.Header>
+                    Generating
+                </Modal.Header>
+                <Modal.Body>
+                    The XRPL wallet is being generated!
+                    <Spinner />
+                </Modal.Body>
+            </Modal>
         </div>
     );
 }

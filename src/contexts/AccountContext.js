@@ -174,9 +174,21 @@ export const AccountProvider = ( { children } ) => {
         setSelectedWallet( account );
     }
 
+    const generateAndFundWalletWithFaucet = async () => {
+        if ( !client.current ) {
+            client.current = new Client( process.env.REACT_APP_NETWORK );
+        }
+
+        if ( !client.current.isConnected() ) await client.current.connect();
+
+        const faucetHost = process.env.REACT_APP_FAUCET_NETWORK;
+        const faucetRequest = await client.current.fundWallet( null, { faucetHost } );
+        return faucetRequest.wallet;
+    }
+
     const sendXRP = async ( amount, destination, destinationTag ) => {
 
-        if ( !selectWallet ) throw new Error( "No wallet selected" );
+        if ( !selectedWallet ) throw new Error( "No wallet selected" );
 
         const wallet = Wallet.fromSeed( selectedWallet.seed );
         const client = new Client( process.env.REACT_APP_NETWORK );
@@ -234,7 +246,7 @@ export const AccountProvider = ( { children } ) => {
     }
 
     return (
-        <AccountContext.Provider value={{ accounts, balance, reserve, transactions, selectedWallet, addAccount, removeAccount, selectWallet, refreshBalance, refreshTransactions, sendXRP }}>{children}</AccountContext.Provider>
+        <AccountContext.Provider value={{ accounts, balance, reserve, transactions, selectedWallet, addAccount, removeAccount, selectWallet, refreshBalance, refreshTransactions, sendXRP, generateAndFundWalletWithFaucet }}>{children}</AccountContext.Provider>
     );
 }
 
