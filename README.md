@@ -1,6 +1,6 @@
 # XRPL Dangerfield Wallet
 
-This project was setup with the help of Chris Dangerfield's XRPL course
+This is a fully functional XRP Ledger wallet built with React. 
 
 ## Obtained XRPL Certification
 
